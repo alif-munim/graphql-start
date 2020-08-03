@@ -1,0 +1,25 @@
+{
+  "name": "graphql-start",
+  "version": "1.0.0",
+  "description": "Simple GraphQL server",
+  "main": "server.js",
+  "scripts": {
+    "dev:server": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alif-munim/graphql-start.git"
+  },
+  "author": "Alif Munim",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/alif-munim/graphql-start/issues"
+  },
+  "homepage": "https://github.com/alif-munim/graphql-start#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-graphql": "^0.11.0",
+    "graphql": "^15.3.0",
+    "nodemon": "^2.0.4"
+  }
+}
