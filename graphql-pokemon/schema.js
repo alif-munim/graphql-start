@@ -93,7 +93,7 @@ const RootQuery = new GraphQLObjectType({
             type: SinglePokemonType,
             args: {
                 id: { 
-                    type: GraphQLInt 
+                    type: GraphQLString
                 }
             },
             resolve(parent, args) {

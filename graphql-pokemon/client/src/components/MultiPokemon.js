@@ -16,7 +16,6 @@ const MULTI_QUERY = gql`
 export default function MultiPokemon() {
     return (
         <div>
-            <h1 className="display-4 my-3">Pokemon</h1>
             <Query query={MULTI_QUERY}> 
                 {
                     ({loading, error, data}) => {
@@ -25,13 +24,14 @@ export default function MultiPokemon() {
 
                         console.log(data.multiPokemon);
 
-                        return <Fragment>
+                        
+                        return <div className="container">
                             {
                                 data.multiPokemon.map((data, index) => (
                                     <SinglePokemon key={index} data={data}/>
                                ))
                             }
-                        </Fragment>
+                        </div>
                         
 
                         
