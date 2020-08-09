@@ -11,6 +11,7 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <div>
+        <h1 className="display-4 my-5 text-center">Pokemon</h1>
         <MultiPokemon />
       </div>
     </ApolloProvider>
