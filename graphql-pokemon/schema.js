@@ -23,6 +23,7 @@ const SinglePokemonType = new GraphQLObjectType({
     name: "SinglePokemon",
     fields: () => ({
         name: { type: GraphQLString },
+        id: { type: GraphQLInt },
         sprites: { type: SpriteType },
         types: { type: new GraphQLList(PokemonTypes) },
         stats: { type: new GraphQLList(PokemonStats) }
