@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import gql from "graphql-tag";
 import { Query } from "react-apollo";
+import { Link } from "react-router-dom";
 
 export default function SinglePokemon({
     data: {
@@ -47,9 +48,11 @@ export default function SinglePokemon({
                                     <h5 className="mt-3">{name}</h5>
                                     {
                                         types.map(entry => (
-                                            <p className="my-0">{entry.type.name}</p>
+                                            <span className="badge badge-primary mx-1">{entry.type.name}</span>
                                         ))
                                     }
+                                    <br/>
+                                    <Link to={`/pokemon/${name}`} className="btn btn-primary mt-3">Details</Link>
                                 </div>
                                 
                             </div>
