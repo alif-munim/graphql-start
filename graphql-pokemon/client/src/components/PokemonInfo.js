@@ -7,6 +7,7 @@ const INFO_QUERY = gql`
     query InfoQuery($name: String!) {
         singlePokemon(id: $name) {
             name
+            id
             sprites {
                 front_default
                 back_default
@@ -32,7 +33,7 @@ export class PokemonInfo extends Component {
         let { name } = this.props.match.params;
 
         return (
-            <Fragment>
+            <div className="container">
                 <Query query={INFO_QUERY} variables={{ name }}>
                     {
                         ({loading, error, data}) => {
@@ -41,6 +42,7 @@ export class PokemonInfo extends Component {
 
                             const {
                                 name,
+                                id,
                                 sprites: {
                                     front_default,
                                     back_default
@@ -51,7 +53,7 @@ export class PokemonInfo extends Component {
 
                             return <div>
                                 <h1 className="display-4 my-3">
-                                    <span className="text-dark">Pokemon:</span> { name }
+                        <span className="text-dark">{id}:</span> { name }
                                 </h1>
                                 <h4 className="mb-3">Sprites</h4>
                                 <img src={front_default} height="250"/>
@@ -74,11 +76,13 @@ export class PokemonInfo extends Component {
                                     }
                                     
                                 </ul>
+                                <hr/>
+                                <Link to="/" className="btn btn-secondary mb-5">Back</Link>
                             </div>
                         }
                     }
                 </Query>
-            </Fragment>
+            </div>
         )
     }
 }

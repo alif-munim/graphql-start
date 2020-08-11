@@ -13,6 +13,7 @@ export default function SinglePokemon({
         query SingleQuery($name: String!) {
             singlePokemon(id: $name) {
                 name
+                id
                 sprites {
                     front_default
                 }
@@ -37,6 +38,7 @@ export default function SinglePokemon({
 
                         const {
                             name,
+                            id,
                             sprites,
                             types
                         } = data.singlePokemon
@@ -45,7 +47,9 @@ export default function SinglePokemon({
                             <div className="media">
                                 <img className="d-flex mr-3" src={sprites.front_default} alt={name} height="150"/>
                                 <div className="media-body">
-                                    <h5 className="mt-3">{name}</h5>
+                                    <h5 className="mt-3">
+                                    <span className="text-dark">{id}:</span> {name}
+                                    </h5>
                                     {
                                         types.map(entry => (
                                             <span className="badge badge-primary mx-1">{entry.type.name}</span>
