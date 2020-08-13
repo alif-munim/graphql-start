@@ -12,7 +12,9 @@ const client = new ApolloClient({
 
 function App() {
 
-  const [displayNum, setDisplayNum] = useState(5);
+  const [displayNum, setDisplayNum] = useState(100);
+  const [showSearch, setShowSearch] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
 
   return (
     <ApolloProvider client={client}>
@@ -20,6 +22,27 @@ function App() {
         <div>
           <h1 className="display-4 my-5 text-center">Pokemon</h1>
           <div className="container mb-5">
+            <button 
+              className="btn btn-primary"
+              onClick={() => {
+                setShowSearch(!showSearch)
+              }}> 
+              Search
+            </button>
+            {
+              showSearch && 
+              <input 
+                className="form-control my-3" 
+                type="text" 
+                id="search" 
+                name="search" 
+                value={searchValue}
+                onChange={e => {
+                  setSearchValue(e.target.value.toString());
+                }}
+              />
+            }
+            
             <input 
               onChange={e=> {
                 setDisplayNum(parseInt(e.target.value))
@@ -35,7 +58,7 @@ function App() {
           </div>
           <Route exact path="/" render={
             (props) => 
-              <MultiPokemon {...props} num={displayNum}/>
+              <MultiPokemon {...props} num={displayNum} search={searchValue}/>
           } />
           <Route exact path="/pokemon/:name" component={PokemonInfo} />
         </div>

@@ -7,6 +7,33 @@ const {
     GraphQLSchema,
 } = require("graphql");
 
+// Species
+
+const PokemonSpecies = new GraphQLObjectType({
+    name: "PokemonSpecies",
+    fields: () => ({
+        evolution_chain: { type: PokemonURL }
+    })
+});
+
+const PokemonURL = new GraphQLObjectType({
+    name: "PokemonURL",
+    fields: () => ({
+        url: { type: GraphQLString }
+    })
+});
+
+
+// Evolution Chain
+
+const SpeciesType = new GraphQLObjectType({
+    name: "SpeciesType",
+    fields: () => ({
+        name: { type: GraphQLString },
+        url: { type: GraphQLString }
+    })
+});
+
 // Multiple Pokemon
 
 const MultiPokemonType = new GraphQLObjectType({
@@ -99,6 +126,18 @@ const RootQuery = new GraphQLObjectType({
             },
             resolve(parent, args) {
                 return axios.get(`https://pokeapi.co/api/v2/pokemon/${args.id}`)
+                    .then(res => res.data);
+            }
+        },
+        pokemonSpecies: {
+            type: PokemonSpecies,
+            args: {
+                url: {
+                    type: GraphQLString
+                }
+            },
+            resolve(parent, args) {
+                return axios.get(`${args.url}`)
                     .then(res => res.data);
             }
         }
