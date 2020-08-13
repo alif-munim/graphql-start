@@ -2,6 +2,7 @@ import React, { Component, Fragment } from "react";
 import gql from "graphql-tag";
 import { Query } from "react-apollo";
 import { Link } from "react-router-dom";
+import Species from "./Species"
 
 const INFO_QUERY = gql`
     query InfoQuery($name: String!) {
@@ -22,6 +23,10 @@ const INFO_QUERY = gql`
                 stat {
                     name
                 }
+            }
+            species {
+                name
+                url
             }
         }
     }
@@ -48,8 +53,12 @@ export class PokemonInfo extends Component {
                                     back_default
                                 },
                                 types,
-                                stats
+                                stats,
+                                species
                             } = data.singlePokemon;
+
+                            // console.log(species.url);
+                            
 
                             return <div>
                                 <h1 className="display-4 my-3">
@@ -58,11 +67,13 @@ export class PokemonInfo extends Component {
                                 <h4 className="mb-3">Sprites</h4>
                                 <img src={front_default} height="250"/>
                                 <img src={back_default} height="250"/>
+                                <h4>Evolution Chain</h4>
+                                <Species url={species.url} />
                                 <h4 className="mb-3">Types</h4>
                                 <ul className="list-group mb-5">
                                     {
                                         types.map(typeObj => (
-                                        <li key={typeObj.name} className="list-group-item">{typeObj.type.name}</li>
+                                        <li key={typeObj.type.name} className="list-group-item">{typeObj.type.name}</li>
                                         ))
                                     }
                                     
@@ -71,7 +82,7 @@ export class PokemonInfo extends Component {
                                 <ul className="list-group mb-5">
                                     {
                                         stats.map(statObj => (
-                                        <li key={statObj.name} className="list-group-item">{statObj.stat.name}: {statObj.base_stat}</li>
+                                        <li key={statObj.stat.name} className="list-group-item">{statObj.stat.name}: {statObj.base_stat}</li>
                                         ))
                                     }
                                     

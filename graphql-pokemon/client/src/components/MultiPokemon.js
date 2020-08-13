@@ -43,7 +43,7 @@ export default function MultiPokemon({
                             return <div className="container">
                             {
                                 filteredPokemon.map((data, index) => (
-                                    <SinglePokemon key={index} data={data}/>
+                                    <SinglePokemon key={index} name={data.name}/>
                                ))
                             }
                             </div>
@@ -51,7 +51,7 @@ export default function MultiPokemon({
                             return <div className="container">
                             {
                                 data.multiPokemon.map((data, index) => (
-                                    <SinglePokemon key={index} data={data}/>
+                                    <SinglePokemon key={index} name={data.name}/>
                                ))
                             }
                         </div>

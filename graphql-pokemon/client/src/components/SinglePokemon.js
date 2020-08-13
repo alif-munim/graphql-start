@@ -4,9 +4,7 @@ import { Query } from "react-apollo";
 import { Link } from "react-router-dom";
 
 export default function SinglePokemon({
-    data: {
-        name
-    }
+    name
 }) {
 
     const SINGLE_QUERY = gql`
@@ -52,7 +50,7 @@ export default function SinglePokemon({
                                     </h5>
                                     {
                                         types.map(entry => (
-                                            <span className="badge badge-primary mx-1">{entry.type.name}</span>
+                                            <span key={entry.type.name} className="badge badge-primary mx-1">{entry.type.name}</span>
                                         ))
                                     }
                                     <br/>

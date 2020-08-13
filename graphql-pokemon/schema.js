@@ -34,6 +34,21 @@ const SpeciesType = new GraphQLObjectType({
     })
 });
 
+const EvolvesTo = new GraphQLObjectType({
+    name: "EvolvesTo",
+    fields: () => ({
+        species: { type: SpeciesType },
+        evolves_to: {type: new GraphQLList(EvolvesTo)}
+    })
+});
+
+const EvolutionChain = new GraphQLObjectType({
+    name: "EvolutionChain",
+    fields: () => ({
+        chain: { type: EvolvesTo }
+    })
+});
+
 // Multiple Pokemon
 
 const MultiPokemonType = new GraphQLObjectType({
@@ -53,7 +68,8 @@ const SinglePokemonType = new GraphQLObjectType({
         id: { type: GraphQLInt },
         sprites: { type: SpriteType },
         types: { type: new GraphQLList(PokemonTypes) },
-        stats: { type: new GraphQLList(PokemonStats) }
+        stats: { type: new GraphQLList(PokemonStats) },
+        species: { type: SpeciesType }
     })
 });
 
@@ -131,6 +147,18 @@ const RootQuery = new GraphQLObjectType({
         },
         pokemonSpecies: {
             type: PokemonSpecies,
+            args: {
+                url: {
+                    type: GraphQLString
+                }
+            },
+            resolve(parent, args) {
+                return axios.get(`${args.url}`)
+                    .then(res => res.data);
+            }
+        },
+        evolutionChain: {
+            type: EvolutionChain,
             args: {
                 url: {
                     type: GraphQLString
