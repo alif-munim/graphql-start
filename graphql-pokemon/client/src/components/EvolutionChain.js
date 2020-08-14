@@ -42,8 +42,14 @@ export const EvolutionChain = ({ url }) => {
                         // console.log(chainObj);
 
                         evolutions.push(chainObj.species.name);
-                        if (chainObj.evolves_to.length != null && chainObj.evolves_to.length > 0) evolutions.push(chainObj.evolves_to[0].species.name);
-                        if (chainObj.evolves_to[0].evolves_to != null && chainObj.evolves_to[0].evolves_to.length > 0) evolutions.push(chainObj.evolves_to[0].evolves_to[0].species.name);
+                        if (chainObj.evolves_to != null && chainObj.evolves_to.length > 0) {
+                            evolutions.push(chainObj.evolves_to[0].species.name);
+
+                            if (chainObj.evolves_to[0].evolves_to != null && chainObj.evolves_to[0].evolves_to.length > 0) {
+                                evolutions.push(chainObj.evolves_to[0].evolves_to[0].species.name);
+                            }
+                        }
+                        
                         
 
                         // console.log(evolutions);
