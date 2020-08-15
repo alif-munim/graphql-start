@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { Badge } from 'antd';
 import 'antd/dist/antd.css';
 import classNames from "classnames";
+import Spin from "./Spin"
 
 export default function SinglePokemon({
     name
@@ -32,7 +33,9 @@ export default function SinglePokemon({
             <Query query={SINGLE_QUERY} variables={{ name }}>
                 {
                     ({loading, error, data}) => {
-                        if (loading) return <h4>Loading...</h4>
+                        if (loading) return <div className="my-center">
+                            <Spin/>
+                        </div>
                         if (error) console.log(error)
 
                         // console.log(data);

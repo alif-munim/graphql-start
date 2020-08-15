@@ -6,6 +6,7 @@ import Home from "./components/Home";
 import MultiPokemon from "./components/MultiPokemon";
 import PokemonInfo from "./components/PokemonInfo";
 import "./App.css";
+import Logo from "./Logo.PNG";
 
 const client = new ApolloClient({
   uri: "http://localhost:5000/graphql"
@@ -18,7 +19,10 @@ function App() {
     <ApolloProvider client={client}>
       <Router>
           <Link to="/">
-            <h1 className="display-4 my-5 text-center">Pokemon</h1>
+            <div className="my-center my-3">
+              <img height="100" src={Logo}/>
+            </div>
+            
           </Link>
           <Route exact path="/" component={Home} />
           <Route exact path="/pokemon/:name" component={PokemonInfo} />

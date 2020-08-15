@@ -27,9 +27,10 @@ export default function MultiPokemon({
             <Query query={MULTI_QUERY} variables={{ num }}> 
                 {
                     ({loading, error, data}) => {
-                        if (loading) return <div className="container align-self-center">
+                        if (loading) return <div className="my-center">
                             <Spin/>
-                        </div> 
+                        </div>
+                    
                         if (error) console.log(error);
 
                         // console.log(data.multiPokemon);

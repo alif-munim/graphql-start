@@ -1,8 +1,7 @@
-.centerSpin {
-    text-align: center;
-    background: rgba(0, 0, 0, 0.05);
-    border-radius: 4px;
-    margin-bottom: 20px;
-    padding: 30px 50px;
-    margin: 20px 0;
-  }
+.my-center {
+  color: red;
+  text-align: center;
+  margin: auto;
+  width: 50%;
+}
+

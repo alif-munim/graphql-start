@@ -2,6 +2,7 @@ import React from "react";
 import gql from "graphql-tag";
 import { Query } from "react-apollo";
 import SinglePokemon from "./SinglePokemon"
+import Spin from "./Spin";
 
 const EVOLUTION_QUERY = gql`
     query evolutionQuery($url: String!) {
@@ -34,7 +35,9 @@ export const EvolutionChain = ({ url }) => {
             <Query query={EVOLUTION_QUERY} variables={{ url }}>
                 {
                     ({loading, error, data}) => {
-                        if (loading) return <h4>Loading...</h4>
+                        if (loading) return <div className="my-center">
+                            <Spin/>
+                        </div>
                         if (error) console.log(error);
 
                         const evolutions = [];
