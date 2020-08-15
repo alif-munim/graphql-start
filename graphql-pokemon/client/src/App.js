@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import Home from "./components/Home";
 import MultiPokemon from "./components/MultiPokemon";
 import PokemonInfo from "./components/PokemonInfo";
 import "./App.css";
@@ -13,56 +14,14 @@ const client = new ApolloClient({
 
 function App() {
 
-  const [displayNum, setDisplayNum] = useState(100);
-  const [showSearch, setShowSearch] = useState(false);
-  const [searchValue, setSearchValue] = useState("");
-
   return (
     <ApolloProvider client={client}>
       <Router>
-        <div>
-          <h1 className="display-4 my-5 text-center">Pokemon</h1>
-          <div className="container mb-5">
-            <button 
-              className="btn btn-primary"
-              onClick={() => {
-                setShowSearch(!showSearch)
-              }}> 
-              Search
-            </button>
-            {
-              showSearch && 
-              <input 
-                className="form-control my-3" 
-                type="text" 
-                id="search" 
-                name="search" 
-                value={searchValue}
-                onChange={e => {
-                  setSearchValue(e.target.value.toString());
-                }}
-              />
-            }
-            
-            <input 
-              onChange={e=> {
-                setDisplayNum(parseInt(e.target.value))
-              }}
-              className="form-control" 
-              type="number" 
-              id="quantity" 
-              name="quantity" 
-              min="1" 
-              max="100"
-              value={displayNum}
-            />
-          </div>
-          <Route exact path="/" render={
-            (props) => 
-              <MultiPokemon {...props} num={displayNum} search={searchValue}/>
-          } />
+          <Link to="/">
+            <h1 className="display-4 my-5 text-center">Pokemon</h1>
+          </Link>
+          <Route exact path="/" component={Home} />
           <Route exact path="/pokemon/:name" component={PokemonInfo} />
-        </div>
       </Router>
     </ApolloProvider>
     
