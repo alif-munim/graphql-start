@@ -2,12 +2,20 @@ import React from "react";
 import gql from "graphql-tag";
 import { Query } from "react-apollo";
 import { EvolutionChain } from "./EvolutionChain";
+import ProgressBar from "./Progress";
 
 const SPECIES_QUERY = gql`\
     query speciesQuery($url: String!) {
         pokemonSpecies(url: $url) {
             evolution_chain {
                 url
+            }
+            flavor_text_entries {
+                flavor_text
+                language {
+                    name
+                    url
+                }
             }
         }
     }
@@ -22,10 +30,34 @@ export default function Species({ url }) {
                         if (loading) return <h4>Loading...</h4>
                         if (error) console.log(error);
 
-                        console.log(data.pokemonSpecies.evolution_chain.url)
+                        console.log(data.pokemonSpecies.evolution_chain.url);
+
+                        const {
+                            evolution_chain,
+                            flavor_text_entries
+                        } = data.pokemonSpecies;
+
+                        let description;
+
+                        for (let i = 0; i < flavor_text_entries.length; i++) {
+                            if (flavor_text_entries[i].language.name == "en") {
+                                description = flavor_text_entries[i].flavor_text;
+                            }
+                        }
 
                         return <div>
-                            <EvolutionChain url={data.pokemonSpecies.evolution_chain.url}/>
+                            <div className="mb-5">
+                                <h4 className="mb-3">Description</h4>
+                                <p className="text-primary"></p>
+                                <div class="card">
+                                    <div class="card-body">
+                                        {description}
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <h4 className="mb-3">Evolution Chain</h4>
+                            <EvolutionChain url={evolution_chain.url}/>
                         </div>
                     }
                 }

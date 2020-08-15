@@ -2,7 +2,9 @@ import React, { Component, Fragment } from "react";
 import gql from "graphql-tag";
 import { Query } from "react-apollo";
 import { Link } from "react-router-dom";
-import Species from "./Species"
+import Species from "./Species";
+import ProgressBar from "./Progress"
+import PokeStat from "./PokeStat";
 
 const INFO_QUERY = gql`
     query InfoQuery($name: String!) {
@@ -56,19 +58,19 @@ export class PokemonInfo extends Component {
                                 stats,
                                 species
                             } = data.singlePokemon;
-
-                            // console.log(species.url);
                             
 
                             return <div>
                                 <h1 className="display-4 my-3">
-                        <span className="text-dark">{id}:</span> { name }
+                                    <span className="text-dark">{id}:</span> { name }
                                 </h1>
+
                                 <h4 className="mb-3">Sprites</h4>
                                 <img src={front_default} height="250"/>
                                 <img src={back_default} height="250"/>
-                                <h4>Evolution Chain</h4>
+
                                 <Species url={species.url} />
+
                                 <h4 className="mb-3">Types</h4>
                                 <ul className="list-group mb-5">
                                     {
@@ -76,18 +78,18 @@ export class PokemonInfo extends Component {
                                         <li key={typeObj.type.name} className="list-group-item">{typeObj.type.name}</li>
                                         ))
                                     }
-                                    
+                                
                                 </ul>
+
                                 <h4 className="mb-3">Stats</h4>
-                                <ul className="list-group mb-5">
-                                    {
-                                        stats.map(statObj => (
-                                        <li key={statObj.stat.name} className="list-group-item">{statObj.stat.name}: {statObj.base_stat}</li>
-                                        ))
-                                    }
-                                    
-                                </ul>
+                                <div class="card mb-5">
+                                    <div class="card-body">
+                                        <PokeStat statistics={stats}/>
+                                    </div>
+                                </div>
+                                
                                 <hr/>
+                                
                                 <Link to="/" className="btn btn-secondary mb-5">Back</Link>
                             </div>
                         }

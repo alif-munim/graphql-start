@@ -12,9 +12,18 @@ const {
 const PokemonSpecies = new GraphQLObjectType({
     name: "PokemonSpecies",
     fields: () => ({
-        evolution_chain: { type: PokemonURL }
+        evolution_chain: { type: PokemonURL },
+        flavor_text_entries: { type: new GraphQLList(FlavorText) }
     })
 });
+
+const FlavorText = new GraphQLObjectType({
+    name: "FlavorText",
+    fields: () => ({
+        flavor_text: { type: GraphQLString },
+        language: { type: URLInfoType }
+    })
+})
 
 const PokemonURL = new GraphQLObjectType({
     name: "PokemonURL",
@@ -26,8 +35,8 @@ const PokemonURL = new GraphQLObjectType({
 
 // Evolution Chain
 
-const SpeciesType = new GraphQLObjectType({
-    name: "SpeciesType",
+const URLInfoType = new GraphQLObjectType({
+    name: "URLInfoType",
     fields: () => ({
         name: { type: GraphQLString },
         url: { type: GraphQLString }
@@ -37,7 +46,7 @@ const SpeciesType = new GraphQLObjectType({
 const EvolvesTo = new GraphQLObjectType({
     name: "EvolvesTo",
     fields: () => ({
-        species: { type: SpeciesType },
+        species: { type: URLInfoType },
         evolves_to: {type: new GraphQLList(EvolvesTo)}
     })
 });
@@ -69,7 +78,7 @@ const SinglePokemonType = new GraphQLObjectType({
         sprites: { type: SpriteType },
         types: { type: new GraphQLList(PokemonTypes) },
         stats: { type: new GraphQLList(PokemonStats) },
-        species: { type: SpeciesType }
+        species: { type: URLInfoType }
     })
 });
 

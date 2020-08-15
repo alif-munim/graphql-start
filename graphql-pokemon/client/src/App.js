@@ -3,7 +3,8 @@ import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import MultiPokemon from "./components/MultiPokemon";
-import PokemonInfo from "./components/PokemonInfo"
+import PokemonInfo from "./components/PokemonInfo";
+import "./App.css";
 
 const client = new ApolloClient({
   uri: "http://localhost:5000/graphql"
