@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import Species from "./Species";
 import ProgressBar from "./Progress"
 import PokeStat from "./PokeStat";
+import Spin from "./Spin";
 
 const INFO_QUERY = gql`
     query InfoQuery($name: String!) {
@@ -44,7 +45,9 @@ export class PokemonInfo extends Component {
                 <Query query={INFO_QUERY} variables={{ name }}>
                     {
                         ({loading, error, data}) => {
-                            if (loading) return <h4>Loading...</h4>
+                            if (loading) return <div className="my-center">
+                                <Spin/>
+                            </div>
                             if (error) return console.log(error)
 
                             const {
