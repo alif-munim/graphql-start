@@ -61,8 +61,8 @@ function Home() {
                                             pokemonArr
                                                 .slice(0, displayNum + 1)
                                                 .filter(pokemonObj => 
-                                                    pokemonObj.value
-                                                    .startsWith(searchText)
+                                                    pokemonObj.value.toLowerCase()
+                                                    .startsWith(searchText.toLowerCase())
                                                 )
                                         );
                                     }}
@@ -86,7 +86,7 @@ function Home() {
                     />
                 </form>
             </div>
-            <MultiPokemon num={displayNum} search={searchValue} />
+            <MultiPokemon num={displayNum} search={searchValue.toLowerCase()} />
         </div>
 
     );
