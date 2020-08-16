@@ -38,8 +38,6 @@ export default function SinglePokemon({
                         </div>
                         if (error) console.log(error)
 
-                        // console.log(data);
-
                         const {
                             name,
                             id,
@@ -54,11 +52,6 @@ export default function SinglePokemon({
                                     <h5 className="mt-3">
                                     <span className="text-dark">{id}:</span> {name}
                                     </h5>
-                                    {/* {
-                                        types.map(entry => (
-                                            <span key={entry.type.name} className="badge badge-primary mx-1">{entry.type.name}</span>
-                                        ))
-                                    } */}
                                     {
                                         types.map(entry => (
                                             <div key={entry.type.name}>

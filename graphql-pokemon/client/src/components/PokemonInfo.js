@@ -3,7 +3,6 @@ import gql from "graphql-tag";
 import { Query } from "react-apollo";
 import { Link } from "react-router-dom";
 import Species from "./Species";
-import ProgressBar from "./Progress"
 import PokeStat from "./PokeStat";
 import Spin from "./Spin";
 
@@ -85,13 +84,11 @@ export class PokemonInfo extends Component {
                                 </ul>
 
                                 <h4 className="mb-3">Stats</h4>
-                                <div class="card mb-5">
-                                    <div class="card-body">
+                                <div className="card mb-5">
+                                    <div className="card-body">
                                         <PokeStat statistics={stats}/>
                                     </div>
                                 </div>
-                                
-                                <hr/>
                                 
                                 <Link to="/" className="btn btn-secondary mb-5">Back</Link>
                             </div>

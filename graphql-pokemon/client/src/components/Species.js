@@ -33,8 +33,6 @@ export default function Species({ url }) {
                         </div>
                         if (error) console.log(error);
 
-                        console.log(data.pokemonSpecies.evolution_chain.url);
-
                         const {
                             evolution_chain,
                             flavor_text_entries
@@ -52,8 +50,8 @@ export default function Species({ url }) {
                             <div className="mb-5">
                                 <h4 className="mb-3">Description</h4>
                                 <p className="text-primary"></p>
-                                <div class="card">
-                                    <div class="card-body">
+                                <div className="card">
+                                    <div className="card-body">
                                         {description}
                                     </div>
                                 </div>

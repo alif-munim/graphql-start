@@ -1,28 +1,80 @@
 import React, { useState } from "react";
 import MultiPokemon from "./MultiPokemon";
+import gql from "graphql-tag";
+import { Query } from "react-apollo";
+import { AutoComplete } from 'antd';
+import 'antd/dist/antd.css';
+import Spin from "./Spin";
 
 function Home() {
-    const [displayNum, setDisplayNum] = useState(100);
+
+    const ALL_POKEMON_QUERY = gql`
+        query allPokemonQuery {
+            multiPokemon(limit: 900) {
+                name
+            }
+        }
+    `;
+
+    const [displayNum, setDisplayNum] = useState(10);
     const [searchValue, setSearchValue] = useState("");
+    const [options, setOptions] = useState([]);
+
+    const pokemonArr = [];
+
+    const onSelect = data => {
+        setSearchValue(data);
+    };
+
+    const onChange = data => {
+        setSearchValue(data);
+    };
 
     return (
-        <div>
-            
+        <div>          
             <div className="container mb-5"> 
-                <form className="form-inline">
-                    <input 
-                        className="form-control mb-2 mr-sm-2" 
-                        type="text" 
-                        id="search" 
-                        name="search" 
-                        value={searchValue}
-                        onChange={e => {
-                        setSearchValue(e.target.value.toString());
-                        }}
-                    />                
+                <form className="form-inline justify-content-center">
+                    <Query query={ALL_POKEMON_QUERY}>
+                    {
+                        ({loading, error, data}) => {
+                            if (loading) return <div className="my-center">
+                                <Spin/>
+                            </div>
+                            if (error) console.log(error);
+
+                            data.multiPokemon.forEach(pokemon => {
+                                pokemonArr.push({
+                                    value: pokemon.name
+                                });
+                            });                    
+
+                            return <div>
+                                <AutoComplete
+                                    className="form-control mb-2 mr-sm-2"
+                                    options={options}
+                                    style={{
+                                    width: 200,
+                                    }}
+                                    onSelect={onSelect}
+                                    onSearch={(searchText) => {
+                                        setOptions(
+                                            pokemonArr
+                                                .slice(0, displayNum + 1)
+                                                .filter(pokemonObj => 
+                                                    pokemonObj.value
+                                                    .startsWith(searchText)
+                                                )
+                                        );
+                                    }}
+                                    onChange={onChange}
+                                />
+                            </div>
+                        }
+                    }
+                    </Query>
                     <input 
                     onChange={e=> {
-                        setDisplayNum(parseInt(e.target.value))
+                        setDisplayNum(parseInt(e.target.value));
                     }}
                     className="form-control mb-2 mr-sm-2" 
                     type="number" 
