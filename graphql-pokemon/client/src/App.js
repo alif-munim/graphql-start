@@ -20,11 +20,11 @@ function App() {
       <Router>
           <Link to="/">
             <div className="my-center my-3">
-              <img height="100" src={Logo}/>
+              <img width="85%" src={Logo}/>
             </div>
             
           </Link>
-          <Route exact path="/" component={Home} />
+          <Route exact path="/" component={Home}/>
           <Route exact path="/pokemon/:name" component={PokemonInfo} />
       </Router>
     </ApolloProvider>
