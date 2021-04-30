@@ -49,7 +49,7 @@ The shape of these responses are pre-defined, and it is often the case that we d
 ```
 
 # PokeQuery
-Built with GraphQL and the PokeAPI.
+Built with GraphQL and the PokeAPI. <br/><br/>
 <kbd><img align="left" width="500" src="https://i.ibb.co/89LRmWh/poke-01.png" alt="registration-01" border="0"></kbd><br/><br/>
 <kbd><img align="left" width="500" src="https://i.ibb.co/hyfLX9N/poke-02.png" alt="registration-01" border="0"></kbd><br/><br/>
 <kbd><img align="left" width="500" src="https://i.ibb.co/WkS4xJY/poke-03.png" alt="registration-01" border="0"></kbd><br/><br/>
